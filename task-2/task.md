@@ -1,10 +1,5 @@
 # Kanban Board
 
-```yaml
-Type: Lab
-Estimated Time: 6–10 hours
-```
-
 ---
 
 ## Objective
@@ -39,7 +34,7 @@ All JS files use ES Modules (`type="module"` on the `<script>` tag in `index.htm
 
 ---
 
-### Part 1 — State and Persistence
+### Ticket 1 — State and Persistence
 
 **Objective:** Build the single source of truth for the board and wire it to localStorage so state survives a page reload.
 
@@ -207,7 +202,7 @@ moveCard(/* card id */, 'right');
 
 ---
 
-### Part 2 — Board Rendering
+### Ticket 2 — Board Rendering
 
 **Objective:** Implement a `renderBoard()` function that rebuilds the entire board DOM from state on every call.
 
@@ -328,7 +323,7 @@ Add a card to the last column — `→` must be disabled, `←` must be enabled.
 
 ---
 
-### Part 3 — Event Wiring
+### Ticket 3 — Event Wiring
 
 **Objective:** Wire all user interactions to state mutations and re-render — using a single delegated listener per board action.
 
@@ -453,7 +448,7 @@ All interactions work end-to-end:
 
 ---
 
-### Part 4 — Filtering
+### Ticket 4 — Filtering
 
 **Objective:** Add a real-time search input that filters cards by title across all columns without modifying state.
 
