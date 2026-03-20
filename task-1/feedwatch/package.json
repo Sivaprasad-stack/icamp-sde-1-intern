@@ -1,0 +1,25 @@
+{
+  "type": "module",
+  "name": "feedwatch",
+  "version": "1.0.0",
+  "bin": {
+    "feedwatch": "./feedwatch.js"
+  },
+  "files": [
+    "feedwatch.js",
+    "commands/",
+    "lib/"
+  ],
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.3.2",
+    "axios": "^1.13.6",
+    "chalk": "^5.6.2",
+    "cli-table3": "^0.6.5",
+    "commander": "^14.0.3",
+    "fast-xml-parser": "^5.5.8",
+    "ora": "^9.3.0"
+  }
+}
