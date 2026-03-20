@@ -1,4 +1,5 @@
 import { getState } from './state.js';
+import { applyFilter } from './events.js';
 
 export function renderBoard() {
   const board = document.getElementById('board');
@@ -127,5 +128,8 @@ export function renderBoard() {
   addColBtn.type = 'button';
   addColBtn.textContent = 'Add column';
   board.appendChild(addColBtn);
+
+  // Ticket 4: re-apply filtering after every full re-render.
+  applyFilter();
 }
 

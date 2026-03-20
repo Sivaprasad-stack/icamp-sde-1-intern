@@ -7,9 +7,19 @@ import {
   removeCard,
   moveCard,
 } from './state.js';
-import { renderBoard } from './board.js';
 
 let openForm = null;
+let cachedRenderBoard = null;
+
+async function callRenderBoard() {
+  if (cachedRenderBoard) {
+    cachedRenderBoard();
+    return;
+  }
+  const mod = await import('./board.js');
+  cachedRenderBoard = mod.renderBoard;
+  cachedRenderBoard();
+}
 
 function closeOpenForms() {
   if (!openForm) return;
@@ -110,7 +120,10 @@ export function initEvents() {
   const board = document.getElementById('board');
   if (!board) return;
 
-  board.addEventListener('click', (e) => {
+  const searchEl = document.getElementById('search');
+  if (searchEl) searchEl.addEventListener('input', applyFilter);
+
+  board.addEventListener('click', async (e) => {
     const target = e.target;
     if (!target || !(target instanceof Element)) return;
 
@@ -140,7 +153,7 @@ export function initEvents() {
         if (mode === 'add') {
           const columnId = formEl.dataset.columnId;
           addCard(columnId, trimmedTitle, String(description));
-          renderBoard();
+          await callRenderBoard();
           closeOpenForms();
           return;
         }
@@ -148,7 +161,7 @@ export function initEvents() {
         if (mode === 'edit') {
           const cardId = formEl.dataset.cardId;
           updateCard(cardId, trimmedTitle, String(description));
-          renderBoard();
+          await callRenderBoard();
           closeOpenForms();
           return;
         }
@@ -166,7 +179,7 @@ export function initEvents() {
       if (title === null) return;
       try {
         addColumn(title);
-        renderBoard();
+        await callRenderBoard();
       } catch (err) {
         window.alert(err instanceof Error ? err.message : String(err));
       }
@@ -182,7 +195,7 @@ export function initEvents() {
       if (newTitle === null) return;
       try {
         renameColumn(columnId, newTitle);
-        renderBoard();
+        await callRenderBoard();
       } catch (err) {
         window.alert(err instanceof Error ? err.message : String(err));
       }
@@ -196,7 +209,7 @@ export function initEvents() {
         if (!ok) return;
       }
       removeColumn(columnId);
-      renderBoard();
+      await callRenderBoard();
       return;
     }
 
@@ -221,21 +234,52 @@ export function initEvents() {
       const ok = window.confirm('Delete this card?');
       if (!ok) return;
       removeCard(cardId);
-      renderBoard();
+      await callRenderBoard();
       return;
     }
 
     if (target.classList.contains('move-left') && cardId) {
       moveCard(cardId, 'left');
-      renderBoard();
+      await callRenderBoard();
       return;
     }
 
     if (target.classList.contains('move-right') && cardId) {
       moveCard(cardId, 'right');
-      renderBoard();
+      await callRenderBoard();
       return;
     }
+  });
+}
+
+export function applyFilter() {
+  const searchInput = document.getElementById('search');
+  const query = (searchInput?.value ?? '').toLowerCase();
+  const columns = document.querySelectorAll('.column');
+
+  columns.forEach((col) => {
+    const cards = col.querySelectorAll('.card');
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const titleEl = card.querySelector('.card-title');
+      const title = (titleEl?.textContent ?? '').toLowerCase();
+      const matches = !query || title.includes(query);
+
+      if (matches) {
+        card.style.display = '';
+        visibleCount += 1;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Columns with no visible cards are dimmed.
+    col.style.opacity = visibleCount === 0 ? '0.4' : '1';
+
+    // Empty placeholder always visible (it's not a `.card`, so we don't hide it).
+    const placeholder = col.querySelector('.empty-placeholder');
+    if (placeholder) placeholder.style.display = '';
   });
 }
 
