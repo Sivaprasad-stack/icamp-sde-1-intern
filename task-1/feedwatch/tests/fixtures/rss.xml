@@ -1,0 +1,20 @@
+<rss version="2.0">
+  <channel>
+    <title>Example RSS Feed</title>
+    <item>
+      <title>Item One</title>
+      <link>http://example.com/1</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 GMT</pubDate>
+      <description>Desc 1</description>
+      <guid>g1</guid>
+    </item>
+    <item>
+      <title></title>
+      <link>http://example.com/2</link>
+      <pubDate>Tue, 02 Jan 2024 00:00:00 GMT</pubDate>
+      <description>Desc 2</description>
+      <guid></guid>
+    </item>
+  </channel>
+</rss>
+

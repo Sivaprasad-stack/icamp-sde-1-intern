@@ -1,0 +1,18 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Example Atom Feed</title>
+  <entry>
+    <title>Atom One</title>
+    <link href="http://example.com/a1" />
+    <published>2024-01-01T00:00:00Z</published>
+    <summary>Atom Desc 1</summary>
+    <id>guid-atom-1</id>
+  </entry>
+  <entry>
+    <title></title>
+    <link href="http://example.com/a2" />
+    <updated>2024-01-02T00:00:00Z</updated>
+    <content>Atom Desc 2</content>
+    <id></id>
+  </entry>
+</feed>
+
