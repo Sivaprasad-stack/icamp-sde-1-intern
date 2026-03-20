@@ -4,6 +4,9 @@ import { Command } from 'commander';
 import chalk from 'chalk';
 import Table from 'cli-table3';
 import { resolveConfig } from './lib/config.js';
+import { register as registerAdd } from './commands/add.js';
+import { register as registerRemove } from './commands/remove.js';
+import { register as registerList } from './commands/list.js';
 
 function formatSourceLabel(source) {
   switch (source) {
@@ -59,6 +62,10 @@ program
       process.exitCode = 1;
     }
   });
+
+registerAdd(program);
+registerRemove(program);
+registerList(program);
 
 program.parse(process.argv);
 
