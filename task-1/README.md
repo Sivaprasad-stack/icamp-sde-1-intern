@@ -3,6 +3,17 @@
 ## What it does
 `feedwatch` is a CLI that monitors RSS/Atom feeds for new items. It keeps a local persisted seen-state so subsequent runs only report items that are new (NEW) vs previously seen (SEEN).
 
+## Sample output (screenshot)
+Representative CLI output (`--help` and a sample `run`):
+
+![Feedwatch CLI sample output](docs/screenshot-output.png)
+
+Regenerate this image from the **repository root** (stdlib only):
+
+```bash
+python scripts/materialize_docs_png.py --task 1
+```
+
 ## Project
 Implementation lives in `task-1/feedwatch/`.
 

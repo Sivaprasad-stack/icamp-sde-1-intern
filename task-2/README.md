@@ -9,6 +9,23 @@ This is a fully client-side Kanban board with:
 
 All board state persists to `localStorage` and survives a page reload.
 
+## Sample output (screenshot)
+Representative UI after serving `task-2/kanban` and opening the app in a browser:
+
+![Kanban board sample UI](docs/screenshot-output.png)
+
+Regenerate this image from the **repository root** (stdlib only):
+
+```bash
+python scripts/materialize_docs_png.py --task 2
+```
+
+Generate **both** task screenshots at once:
+
+```bash
+python scripts/materialize_docs_png.py
+```
+
 ## Project
 Implementation lives in `task-2/kanban/`.
 

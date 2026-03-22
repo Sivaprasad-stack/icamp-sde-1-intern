@@ -1,5 +1,7 @@
 ## Architecture / design decisions
 
+![Feedwatch CLI sample output](docs/screenshot-output.png)
+
 The codebase is centered around a small set of focused modules under `task-1/feedwatch/lib/` and a thin CLI layer in `task-1/feedwatch/commands/`.
 
 Configuration is handled by `lib/config.js` via layered resolution: hardcoded defaults are overridden by `feedwatch.config.json`, then by `FEEDWATCH_*` environment variables, and finally by CLI flags. `resolveConfig(opts)` also returns a `sources` map so `feedwatch config show` can display where each value came from.
